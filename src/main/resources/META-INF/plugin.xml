@@ -1,0 +1,66 @@
+<idea-plugin>
+    <id>mobi.hsz.idea.nodesecurity</id>
+    <name>Node Security</name>
+    <version>0.1.0</version>
+    <vendor email="jakub@hsz.mobi" url="https://github.com/hsz/idea-nodesecurity">hsz</vendor>
+
+    <description><![CDATA[
+      <h1>Node Security</h1>
+      <br/>
+
+      <a href="http://ignore.hsz.mobi">Website</a> |
+      <a href="https://github.com/hsz/idea-nodesecurity">GitHub</a> |
+      <a href="https://github.com/hsz/idea-nodesecurity/issues">Issues</a> |
+      <a href="https://www.paypal.me/hsz">Donate with PayPal</a>
+      <br/>
+      <br/>
+
+      IntelliJ <b>Node Security</b> plugin that indicates which Node packages in your project are vulnerable.<br/>
+      Plugin checks your dependencies against [nodesecurity.io](nodesecurity-io) service.
+
+      <br/>
+      <br/>
+
+      <b>Features</b>
+      <ul>
+        <li>Highlight vulnerable dependencies in `package.json` file.</li>
+      </ul>
+
+      <br/>
+      <br/>
+    ]]></description>
+
+    <change-notes><![CDATA[
+
+        <a href="https://github.com/hsz/idea-nodesecurity/tree/v0.1.0"><b>v0.1.0</b></a> (2018-01-18) <br/><br/>
+        <a href="https://github.com/hsz/idea-nodesecurity/compare/v0.1.0"><small>Full Changelog</small></a> <br/><br/>
+
+        <i>Implemented enhancements:</i>
+
+        <ul>
+            <li>Initial commit</li>
+        </ul>
+
+        <a href="https://github.com/hsz/idea-nodesecurity/blob/master/CHANGELOG.md"><b>Full Changelog History</b></a>
+
+    ]]>
+    </change-notes>
+
+    <idea-version since-build="123.72"/>
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+    </extensions>
+
+    <application-components>
+        <component>
+            <implementation-class>mobi.hsz.idea.nodesecurity.NodeSecurityApplicationComponent</implementation-class>
+        </component>
+    </application-components>
+
+    <project-components>
+    </project-components>
+
+    <actions>
+    </actions>
+</idea-plugin>
