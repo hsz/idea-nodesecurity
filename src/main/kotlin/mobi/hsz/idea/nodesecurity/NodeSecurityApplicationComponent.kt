@@ -1,9 +1,9 @@
 package mobi.hsz.idea.nodesecurity
 
-import com.github.kittinunf.fuel.core.FuelManager
-import com.github.kittinunf.fuel.httpGet
 import com.intellij.openapi.components.ApplicationComponent
-import mobi.hsz.idea.nodesecurity.models.Response
+import mobi.hsz.idea.nodesecurity.utils.ApiService
+import nl.komponents.kovenant.then
+
 
 class NodeSecurityApplicationComponent : ApplicationComponent {
     override fun getComponentName(): String = "NodeSecurityApplicationComponent"
@@ -13,12 +13,8 @@ class NodeSecurityApplicationComponent : ApplicationComponent {
     }
 
     override fun initComponent() {
-        FuelManager.instance.basePath = "https://api.nodesecurity.io"
-        "/advisories".httpGet().responseObject(Response.Deserializer()) { req, res, result ->
-            //result is of type Result<User, Exception>
-            val (response, err) = result
-
-            println("")
+        ApiService.getAdvisories() then {
+            println("count: ${it.size}")
         }
     }
 }
