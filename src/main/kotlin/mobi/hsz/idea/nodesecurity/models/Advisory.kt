@@ -1,7 +1,9 @@
 package mobi.hsz.idea.nodesecurity.models
 
 import com.github.kittinunf.fuel.core.ResponseDeserializable
+import com.github.zafarkhaja.semver.Version
 import com.google.gson.Gson
+import com.intellij.openapi.util.text.StringUtil
 
 
 data class Advisory(
@@ -30,4 +32,8 @@ data class Advisory(
         // if Date objects will be required, use Joda-Time with GsonBuilder
 //        override fun deserialize(content: String) = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").create().fromJson(content, Advisory::class.java)
     }
+
+    fun isVulnerable(version: String): Boolean = Version.valueOf(
+            StringUtil.trimLeading(StringUtil.trimLeading(version, '~'), '^')
+    ).satisfies(vulnerable_versions.replace(Regex("(\\d) <"), "\\1 & <"))
 }

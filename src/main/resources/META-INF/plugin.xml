@@ -50,6 +50,24 @@
     <depends>com.intellij.modules.lang</depends>
 
     <extensions defaultExtensionNs="com.intellij">
+
+        <applicationService
+                serviceInterface="mobi.hsz.idea.nodesecurity.components.NodeSecuritySettings"
+                serviceImplementation="mobi.hsz.idea.nodesecurity.components.NodeSecuritySettings"
+        />
+
+
+        <localInspection
+                bundle="messages.NodeSecurityBundle"
+                language="JSON"
+                implementationClass="mobi.hsz.idea.nodesecurity.codeInspection.VulnerabilityInspection"
+                displayName="Not installed package"
+                key="codeInspection.vulnerability"
+                groupKey="codeInspection.group"
+                enabledByDefault="true"
+                level="ERROR"
+        />
+
     </extensions>
 
     <application-components>
