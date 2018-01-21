@@ -5,9 +5,9 @@ Node Security plugin v0.1.0
 
 [![Donate][badge-paypal-img]][badge-paypal]
 
-[![Version](http://phpstorm.espend.de/badge/7495/version)][plugin-website]
-[![Downloads](http://phpstorm.espend.de/badge/7495/downloads)][plugin-website]
-[![Downloads last month](http://phpstorm.espend.de/badge/7495/last-month)][plugin-website]
+[![Version](http://phpstorm.espend.de/badge/10386/version)][plugin-website]
+[![Downloads](http://phpstorm.espend.de/badge/10386/downloads)][plugin-website]
+[![Downloads last month](http://phpstorm.espend.de/badge/10386/last-month)][plugin-website]
 
 Introduction
 ------------
@@ -84,7 +84,7 @@ Copyright (c) 2018 hsz Jakub Chrzanowski. See the [LICENSE](./LICENSE) file for 
 
     
 [hsz]:                    http://hsz.mobi
-[plugin-website]:         https://plugins.jetbrains.com/plugin/7495
+[plugin-website]:         https://plugins.jetbrains.com/plugin/10386
 [latest-release]:         https://github.com/hsz/idea-nodesecurity/releases/latest
 [nodesecurity-io]:        https://nodesecurity.io
 
