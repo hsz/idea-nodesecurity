@@ -80,3 +80,9 @@ jacocoTestReport {
         html.enabled = true
     }
 }
+
+kotlin {
+    experimental {
+        coroutines "enable"
+    }
+}

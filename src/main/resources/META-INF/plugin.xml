@@ -72,11 +72,15 @@
 
     <application-components>
         <component>
-            <implementation-class>mobi.hsz.idea.nodesecurity.NodeSecurityApplicationComponent</implementation-class>
+            <implementation-class>mobi.hsz.idea.nodesecurity.components.NodeSecurityApplicationComponent</implementation-class>
         </component>
     </application-components>
 
     <project-components>
+        <component>
+            <implementation-class>mobi.hsz.idea.nodesecurity.components.NodeSecurityProjectComponent</implementation-class>
+            <loadForDefaultProject/>
+        </component>
     </project-components>
 
     <actions>

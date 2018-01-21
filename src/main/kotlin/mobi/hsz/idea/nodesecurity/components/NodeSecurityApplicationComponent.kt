@@ -1,10 +1,8 @@
-package mobi.hsz.idea.nodesecurity
+package mobi.hsz.idea.nodesecurity.components
 
 import com.intellij.openapi.components.ApplicationComponent
-import mobi.hsz.idea.nodesecurity.components.NodeSecuritySettings
 import mobi.hsz.idea.nodesecurity.utils.ApiService
 import nl.komponents.kovenant.then
-
 
 class NodeSecurityApplicationComponent : ApplicationComponent {
     override fun getComponentName(): String = "NodeSecurityApplicationComponent"
@@ -20,5 +18,6 @@ class NodeSecurityApplicationComponent : ApplicationComponent {
             settings.state.advisories = it
             settings.loadState(settings.state)
         }
+//        VirtualFileManager.getInstance().addVirtualFileListener(Foo())
     }
 }
