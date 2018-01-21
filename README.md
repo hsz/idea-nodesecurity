@@ -33,6 +33,7 @@ Features
 
 - Highlight vulnerable dependencies in `package.json` file.
 
+![Highlight vulnerable dependencies](https://pbs.twimg.com/media/DUBi5oIX4AEYYEG.jpg)
 
 Installation
 ------------
