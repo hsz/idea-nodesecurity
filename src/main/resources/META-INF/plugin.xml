@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>mobi.hsz.idea.nodesecurity</id>
     <name>Node Security</name>
-    <version>0.1.0</version>
+    <version>0.2.0</version>
     <vendor email="jakub@hsz.mobi" url="https://github.com/hsz/idea-nodesecurity">hsz</vendor>
 
     <description><![CDATA[
@@ -24,6 +24,7 @@
       <b>Features</b>
       <ul>
         <li>Highlight vulnerable dependencies in `package.json` file.</li>
+        <li>Verify package.json files when project is opened</li>
       </ul>
 
       <br/>
@@ -32,14 +33,15 @@
 
     <change-notes><![CDATA[
 
-        <a href="https://github.com/hsz/idea-nodesecurity/tree/v0.1.0"><b>v0.1.0</b></a> (2018-01-21) <br/><br/>
-        <a href="https://github.com/hsz/idea-nodesecurity/compare/v0.1.0"><small>Full Changelog</small></a> <br/><br/>
+        <a href="https://github.com/hsz/idea-nodesecurity/tree/v0.2.0"><b>v0.2.0</b></a> (2018-01-21) <br/><br/>
+        <a href="https://github.com/hsz/idea-nodesecurity/compare/v0.2.0"><small>Full Changelog</small></a> <br/><br/>
 
         <i>Implemented enhancements:</i>
 
         <ul>
             <li>Highlight vulnerable dependencies</li>
             <li>Fetch advisories from nodesecurity.io</li>
+            <li>Verify package.json files when project is opened</li>
         </ul>
 
         <a href="https://github.com/hsz/idea-nodesecurity/blob/master/CHANGELOG.md"><b>Full Changelog History</b></a>
