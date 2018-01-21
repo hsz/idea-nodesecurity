@@ -1,5 +1,5 @@
-IntelliJ Node Security plugin
-=============
+Node Security plugin v0.1.0
+===========================
 
 [![Gitter][badge-gitter-img]][badge-gitter] [![Build Status][badge-travis-img]][badge-travis]
 
@@ -28,7 +28,6 @@ It supports following JetBrains IDEs:
 - DataGrip
 
 
-
 Features
 --------
 
@@ -49,13 +48,14 @@ Restart IDE.
 Changelog
 ---------
 
-### [v0.1.0](https://github.com/hsz/idea-nodesecurity/tree/v0.1.0) (2018-01-18)
+### [v0.1.0](https://github.com/hsz/idea-nodesecurity/tree/v0.1.0) (2018-01-21)
 
 [Full Changelog](https://github.com/hsz/idea-nodesecurity/compare/v0.1.0)
 
 **Implemented enhancements:**
 
-- Initial commit
+- Highlight vulnerable dependencies
+- Fetch advisories from nodesecurity.io
 
 [Full Changelog History](./CHANGELOG.md)
 
