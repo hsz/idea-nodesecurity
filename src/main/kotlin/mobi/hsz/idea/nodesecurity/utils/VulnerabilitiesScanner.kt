@@ -16,16 +16,18 @@ class VulnerabilitiesScanner {
 
         fun scan(file: PsiFile): Sequence<Pair<Advisory, PsiElement>> =
                 buildSequence {
-                    val json: JsonObject = file.firstChild as JsonObject
+                    if (file.firstChild is JsonObject) {
+                        val json: JsonObject = file.firstChild as JsonObject
 
-                    keys.forEach {
-                        json.findProperty(it)?.value?.children?.map {
-                            if (it is JsonElement) {
-                                val name = it.firstChild.text.trim()
-                                val version = it.lastChild.text.trim()
-                                val element = it.originalElement
-                                advisories.getOrDefault(name, emptyList()).forEach {
-                                    if (it.isVulnerable(version)) yield(Pair(it, element))
+                        keys.forEach {
+                            json.findProperty(it)?.value?.children?.map {
+                                if (it is JsonElement) {
+                                    val name = it.firstChild.text.trim()
+                                    val version = it.lastChild.text.trim()
+                                    val element = it.originalElement
+                                    advisories.getOrDefault(name, emptyList()).forEach {
+                                        if (it.isVulnerable(version)) yield(Pair(it, element))
+                                    }
                                 }
                             }
                         }
