@@ -22,7 +22,7 @@ class NodeSecurityProjectComponent(project: Project) : AbstractProjectComponent(
             FilenameIndex.getFilesByName(myProject, "package.json", scope).forEach { file ->
                 val path = file.virtualFile.path
                 if (file.name == "package.json" && !path.contains("node_modules")) {
-                    VulnerabilitiesScanner.scan(file).forEach {
+                    if (VulnerabilitiesScanner.scan(file).iterator().hasNext()) {
                         Notify.show(
                                 myProject,
                                 NodeSecurityBundle.message("notification.vulnerable.title"),
