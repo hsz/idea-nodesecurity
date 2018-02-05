@@ -60,10 +60,11 @@
         />
 
         <localInspection
-                bundle="messages.NodeSecurityBundle"
                 language="JSON"
                 implementationClass="mobi.hsz.idea.nodesecurity.codeInspection.VulnerabilityInspection"
-                displayName="Not installed package"
+                bundle="messages.NodeSecurityBundle"
+                shortName="VulnerabilityInspection"
+                displayName="Vulnerable dependency"
                 key="codeInspection.vulnerability"
                 groupKey="codeInspection.group"
                 enabledByDefault="true"
