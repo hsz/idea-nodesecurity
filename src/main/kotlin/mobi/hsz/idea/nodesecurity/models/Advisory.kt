@@ -1,10 +1,9 @@
 package mobi.hsz.idea.nodesecurity.models
 
 import com.github.kittinunf.fuel.core.ResponseDeserializable
-import com.github.zafarkhaja.semver.Version
 import com.google.gson.Gson
 import com.intellij.openapi.util.text.StringUtil
-
+import com.vdurmont.semver4j.Semver
 
 data class Advisory(
         val id: Int = 0,
@@ -33,7 +32,10 @@ data class Advisory(
 //        override fun deserialize(content: String) = GsonBuilder().setDateFormat("yyyy-MM-dd'T'HH:mm:ssZ").create().fromJson(content, Advisory::class.java)
     }
 
-    fun isVulnerable(version: String): Boolean = Version.valueOf(
-            StringUtil.trimLeading(StringUtil.trimLeading(version, '~'), '^')
-    ).satisfies(vulnerable_versions.replace(Regex("(\\d) <"), "\\1 & <"))
+    fun isVulnerable(version: String): Boolean =
+            Semver(
+                    // TODO: get the real version of the installed package
+                    StringUtil.trimLeading(StringUtil.trimLeading(version, '~'), '^'),
+                    Semver.SemverType.NPM
+            ).satisfies(vulnerable_versions)
 }
