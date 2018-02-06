@@ -52,7 +52,7 @@ class NodeSecurityProjectComponent(project: Project) : AbstractProjectComponent(
     private fun verifyFile(file: PsiFile?) {
         if (file != null && Utils.isSupportedFile(file)) {
             ApplicationManager.getApplication().runReadAction {
-                if (VulnerabilitiesScanner.isVulnerable(file)) {
+                if (VulnerabilitiesScanner.isFileVulnerable(file)) {
                     publisher.notify(file)
                 }
             }
