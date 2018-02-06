@@ -1,14 +1,13 @@
 <idea-plugin>
     <id>mobi.hsz.idea.nodesecurity</id>
     <name>Node Security</name>
-    <version>0.2.0</version>
+    <version>0.3.0</version>
     <vendor email="jakub@hsz.mobi" url="https://github.com/hsz/idea-nodesecurity">hsz</vendor>
 
     <description><![CDATA[
       <h1>Node Security</h1>
       <br/>
 
-      <a href="http://ignore.hsz.mobi">Website</a> |
       <a href="https://github.com/hsz/idea-nodesecurity">GitHub</a> |
       <a href="https://github.com/hsz/idea-nodesecurity/issues">Issues</a> |
       <a href="https://www.paypal.me/hsz">Donate with PayPal</a>
@@ -33,15 +32,20 @@
 
     <change-notes><![CDATA[
 
-        <a href="https://github.com/hsz/idea-nodesecurity/tree/v0.2.0"><b>v0.2.0</b></a> (2018-01-21) <br/><br/>
-        <a href="https://github.com/hsz/idea-nodesecurity/compare/v0.2.0"><small>Full Changelog</small></a> <br/><br/>
+        <a href="https://github.com/hsz/idea-nodesecurity/tree/v0.3.0"><b>v0.3.0</b></a> (2018-02-06) <br/><br/>
+        <a href="https://github.com/hsz/idea-nodesecurity/compare/v0.3.0"><small>Full Changelog</small></a> <br/><br/>
 
         <i>Implemented enhancements:</i>
 
         <ul>
-            <li>Highlight vulnerable dependencies</li>
-            <li>Fetch advisories from nodesecurity.io</li>
-            <li>Verify package.json files when project is opened</li>
+            <li>Support package.json external updates (<a href="https://github.com/hsz/idea-nodesecurity/issues/1">#1</a>)</li>
+            <li>Memoize VulnerabilitiesScanner for better performance</li>
+        </ul>
+
+        <i>Fixed bugs:</i>
+
+        <ul>
+            <li>Unexpected token exception in Advisory.isVulnerable (<a href="https://github.com/hsz/idea-nodesecurity/issues/4">#4</a>, <a href="https://github.com/hsz/idea-nodesecurity/issues/5">#5</a>)</li>
         </ul>
 
         <a href="https://github.com/hsz/idea-nodesecurity/blob/master/CHANGELOG.md"><b>Full Changelog History</b></a>

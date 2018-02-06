@@ -1,4 +1,4 @@
-Node Security plugin v0.2.0
+Node Security plugin v0.3.0
 ===========================
 
 [![Gitter][badge-gitter-img]][badge-gitter] [![Build Status][badge-travis-img]][badge-travis]
@@ -49,15 +49,18 @@ Restart IDE.
 Changelog
 ---------
 
-### [v0.2.0](https://github.com/hsz/idea-nodesecurity/tree/v0.2.0) (2018-01-21)
+### [v0.3.0](https://github.com/hsz/idea-nodesecurity/tree/v0.3.0) (2018-02-06)
 
-[Full Changelog](https://github.com/hsz/idea-nodesecurity/compare/v0.2.0)
+[Full Changelog](https://github.com/hsz/idea-nodesecurity/compare/v0.3.0)
 
 **Implemented enhancements:**
 
-- Highlight vulnerable dependencies
-- Fetch advisories from nodesecurity.io
-- Verify package.json files when project is opened
+- Support package.json external updates ([\#1](https://github.com/hsz/idea-nodesecurity/issues/1))
+- Memoize VulnerabilitiesScanner for better performance
+
+**Fixed bugs**
+
+- Unexpected token exception in Advisory.isVulnerable ([\#4](https://github.com/hsz/idea-nodesecurity/issues/4), [\#5](https://github.com/hsz/idea-nodesecurity/issues/5))
 
 [Full Changelog History](./CHANGELOG.md)
 
