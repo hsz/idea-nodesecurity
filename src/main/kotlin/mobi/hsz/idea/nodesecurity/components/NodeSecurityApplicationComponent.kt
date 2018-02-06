@@ -5,19 +5,18 @@ import mobi.hsz.idea.nodesecurity.utils.ApiService
 import nl.komponents.kovenant.then
 
 class NodeSecurityApplicationComponent : ApplicationComponent {
-    override fun getComponentName(): String = "NodeSecurityApplicationComponent"
-
-    override fun disposeComponent() {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     private var settings: NodeSecuritySettings = NodeSecuritySettings.getInstance()
+
+    override fun getComponentName(): String = "NodeSecurityApplicationComponent"
 
     override fun initComponent() {
         ApiService.getAdvisories() then {
             settings.state.advisories = it
             settings.loadState(settings.state)
         }
-//        VirtualFileManager.getInstance().addVirtualFileListener(Foo())
+    }
+
+    override fun disposeComponent() {
+//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 }

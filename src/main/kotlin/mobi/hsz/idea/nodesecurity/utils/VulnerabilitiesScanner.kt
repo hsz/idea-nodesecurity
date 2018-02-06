@@ -33,6 +33,9 @@ class VulnerabilitiesScanner {
                         }
                     }
                 }
+
+        fun isVulnerable(file: PsiFile?): Boolean =
+                file != null && Utils.isSupportedFile(file.virtualFile) && scan(file).iterator().hasNext()
     }
 }
 
