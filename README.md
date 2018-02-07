@@ -9,11 +9,12 @@ Node Security plugin v0.3.0
 [![Downloads](http://phpstorm.espend.de/badge/10386/downloads)][plugin-website]
 [![Downloads last month](http://phpstorm.espend.de/badge/10386/last-month)][plugin-website]
 
+
 Introduction
 ------------
 
 IntelliJ Node Security plugin that indicates which Node packages in your project are vulnerable.
-Plugin checks your dependencies against [nodesecurity.io](nodesecurity-io) service.
+Plugin checks your dependencies against [nodesecurity.io][nodesecurity-io] service.
 
 It supports following JetBrains IDEs:
 
@@ -34,6 +35,7 @@ Features
 - Highlight vulnerable dependencies in `package.json` file.
 
 ![Highlight vulnerable dependencies](https://pbs.twimg.com/media/DUBi5oIX4AEYYEG.jpg)
+
 
 Installation
 ------------
@@ -87,7 +89,7 @@ License
 
 Copyright (c) 2018 hsz Jakub Chrzanowski. See the [LICENSE](./LICENSE) file for license rights and limitations (MIT).
 
-    
+
 [hsz]:                    http://hsz.mobi
 [plugin-website]:         https://plugins.jetbrains.com/plugin/10386
 [latest-release]:         https://github.com/hsz/idea-nodesecurity/releases/latest
