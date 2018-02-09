@@ -15,8 +15,4 @@ class NodeSecurityApplicationComponent : ApplicationComponent {
             settings.loadState(settings.state)
         }
     }
-
-    override fun disposeComponent() {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 }

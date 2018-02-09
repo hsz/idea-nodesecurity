@@ -56,7 +56,6 @@ class NodeSecurityProjectComponent(project: Project) : AbstractProjectComponent(
                     publisher.notify(file)
                 }
             }
-
         }
     }
 

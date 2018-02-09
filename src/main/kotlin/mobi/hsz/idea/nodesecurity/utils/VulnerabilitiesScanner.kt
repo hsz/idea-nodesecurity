@@ -5,6 +5,7 @@ import com.intellij.json.psi.JsonObject
 import com.intellij.openapi.util.text.StringUtil
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
+import com.intellij.psi.PsiManager
 import com.intellij.util.containers.ContainerUtil
 import mobi.hsz.idea.nodesecurity.components.NodeSecuritySettings
 import mobi.hsz.idea.nodesecurity.models.Advisory
@@ -14,35 +15,70 @@ import kotlin.coroutines.experimental.buildSequence
 class VulnerabilitiesScanner {
     companion object {
         private val advisories: Map<String, List<Advisory>> = NodeSecuritySettings.getInstance().state.advisories
-        private val keys = arrayOf("dependencies", "devDependencies", "optionalDependencies")
 
         private val getVulnerability = ::getDependencyVulnerability.memoize()
 
-        fun scan(file: PsiFile): Sequence<Pair<Advisory, PsiElement>> =
-                buildSequence {
-                    if (file.firstChild is JsonObject) {
-                        val json: JsonObject = file.firstChild as JsonObject
+        fun isFileVulnerable(file: PsiFile?): Boolean =
+                file != null && Utils.isSupportedFile(file.virtualFile) && scanFile(file).iterator().hasNext()
 
-                        keys.forEach {
-                            json.findProperty(it)?.value?.children?.map {
-                                if (it is JsonElement) {
-                                    val name = it.firstChild.text.trim()
-                                    val version = it.lastChild.text.trim()
-                                    val element = it.originalElement
+        fun scanFile(file: PsiFile): Sequence<Pair<Advisory, PsiElement>> {
+            (file.firstChild as? JsonObject).let {
+                return mapDependencies(it, { element ->
+                    val name = element.firstChild.text.trim()
+                    val version = element.lastChild.text.trim()
 
-                                    val vulnerability = getVulnerability(name, version)
-                                    if (vulnerability !== null) {
-                                        yield(Pair(vulnerability, element))
-                                    }
+                    WeakReference<Advisory?>(null)
+                            .or { getVulnerability(name, version) }
+                            .or {
+                                (getPackageLockFile(file)?.firstChild as? JsonObject).let {
+                                    checkDependencies(name, it?.findProperty("dependencies")?.lastChild as JsonObject)
                                 }
                             }
+                            .or {
+                                // TODO: handle yarn.lock
+                                getYarnLockFile(file)
+                                null
+                            }
+                            .get()
+                            .let { if (it === null) null else Pair(it, element) }
+                })
+            }
+        }
+
+        private fun checkDependencies(name: String, dependencies: JsonObject): Advisory? {
+            val meta = dependencies.findProperty(name)
+
+            val (version, requires) = (meta?.lastChild as? JsonObject).let {
+                Pair(
+                        it?.findProperty("version")?.lastChild?.text?.trim(),
+                        it?.findProperty("requires")?.lastChild?.children
+                )
+            }
+
+            return WeakReference<Advisory?>(null)
+                    .or { getVulnerability(name, version!!) }
+                    .or { requires?.mapFirst { getVulnerability(it.firstChild.text.trim(), it.lastChild.text.trim()) } }
+                    .or { requires?.mapFirst { checkDependencies(it.firstChild.text.trim(), dependencies) } }
+                    .get()
+        }
+
+        private fun <T> mapDependencies(json: JsonObject?, function: (element: JsonElement) -> T?): Sequence<T> =
+                buildSequence {
+                    Constants.DEPENDENCIES_KEYS.forEach {
+                        json?.findProperty(it)?.value?.children?.map {
+                            if (it is JsonElement) function(it).let { if (it !== null) yield(it!!) }
                         }
                     }
                 }
 
-        private fun getDependencyVulnerability(name: String, version: String): Advisory? {
-            println(name + ":" + version)
+        private fun getPackageLockFile(file: PsiFile): PsiFile? {
+            val packageLock = file.virtualFile.parent.findChild(Constants.PACKAGE_LOCK_JSON)
+            return packageLock?.let { PsiManager.getInstance(file.project).findFile(it) }
+        }
 
+        private fun getYarnLockFile(file: PsiFile): PsiFile? = null
+
+        private fun getDependencyVulnerability(name: String, version: String): Advisory? {
             advisories.getOrDefault(name, emptyList()).forEach {
                 if (it.isVulnerable(version)) {
                     return it
@@ -50,17 +86,27 @@ class VulnerabilitiesScanner {
             }
             return null
         }
-
-        fun isFileVulnerable(file: PsiFile?): Boolean =
-                file != null && Utils.isSupportedFile(file.virtualFile) && scan(file).iterator().hasNext()
     }
+}
+
+fun <T> WeakReference<T?>.or(other: () -> T?): WeakReference<T?> = when {
+    this.get() !== null -> this
+    else -> WeakReference(other())
+}
+
+fun <T, R> Array<T>.mapFirst(function: (element: T) -> R?): R? {
+    this.forEach {
+        val result = function(it)
+        if (result != null) {
+            return result
+        }
+    }
+    return null
 }
 
 fun String.trim(): String = StringUtil.replace(this, "\"", "")
 
 fun <A, B, R> ((A, B) -> R).memoize(): (A, B) -> R? {
     val cache: MutableMap<Pair<A, B>, WeakReference<R>> = ContainerUtil.newHashMap()
-    return { a: A, b: B ->
-        cache.getOrPut(a to b, { WeakReference(this(a, b)) }).get()
-    }
+    return { a: A, b: B -> cache.getOrPut(a to b, { WeakReference(this(a, b)) }).get() }
 }

@@ -16,7 +16,6 @@ import nl.komponents.kovenant.then
 
 class ApiService {
     companion object {
-        private const val API_ENDPOINT = "https://api.nodesecurity.io"
         private fun advisoriesUrl(offset: Int) = "/advisories?offset=$offset"
 
         fun getAdvisories(advisories: MutableMap<String, MutableList<Advisory>> = mutableMapOf()): Promise<Map<String, List<Advisory>>, Exception> =
@@ -24,7 +23,7 @@ class ApiService {
     }
 
     init {
-        FuelManager.instance.basePath = API_ENDPOINT
+        FuelManager.instance.basePath = Constants.API_ENDPOINT
     }
 
     private fun <T : Any> get(url: String, deserializer: ResponseDeserializable<T>): Promise<T, Exception> =
