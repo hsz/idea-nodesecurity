@@ -2,7 +2,6 @@ package mobi.hsz.idea.nodesecurity.utils
 
 import com.intellij.json.psi.JsonElement
 import com.intellij.json.psi.JsonObject
-import com.intellij.openapi.util.text.StringUtil
 import com.intellij.psi.PsiElement
 import com.intellij.psi.PsiFile
 import com.intellij.psi.PsiManager
@@ -24,8 +23,8 @@ class VulnerabilitiesScanner {
         fun scanFile(file: PsiFile): Sequence<Pair<Advisory, PsiElement>> {
             (file.firstChild as? JsonObject).let {
                 return mapDependencies(it, { element ->
-                    val name = element.firstChild.text.trim()
-                    val version = element.lastChild.text.trim()
+                    val name = element.first()
+                    val version = element.last()
 
                     WeakReference<Advisory?>(null)
                             .or { getVulnerability(name, version) }
@@ -46,19 +45,17 @@ class VulnerabilitiesScanner {
         }
 
         private fun checkDependencies(name: String, dependencies: JsonObject): Advisory? {
-            val meta = dependencies.findProperty(name)
-
-            val (version, requires) = (meta?.lastChild as? JsonObject).let {
+            val (version, requires) = (dependencies.findProperty(name)?.lastChild as? JsonObject).let {
                 Pair(
-                        it?.findProperty("version")?.lastChild?.text?.trim(),
+                        it?.findProperty("version")?.last(),
                         it?.findProperty("requires")?.lastChild?.children
                 )
             }
 
             return WeakReference<Advisory?>(null)
                     .or { getVulnerability(name, version!!) }
-                    .or { requires?.mapFirst { getVulnerability(it.firstChild.text.trim(), it.lastChild.text.trim()) } }
-                    .or { requires?.mapFirst { checkDependencies(it.firstChild.text.trim(), dependencies) } }
+                    .or { requires?.mapFirst { getVulnerability(it.first(), it.last()) } }
+                    .or { requires?.mapFirst { checkDependencies(it.first(), dependencies) } }
                     .get()
         }
 
@@ -71,10 +68,10 @@ class VulnerabilitiesScanner {
                     }
                 }
 
-        private fun getPackageLockFile(file: PsiFile): PsiFile? {
-            val packageLock = file.virtualFile.parent.findChild(Constants.PACKAGE_LOCK_JSON)
-            return packageLock?.let { PsiManager.getInstance(file.project).findFile(it) }
-        }
+        private fun getPackageLockFile(file: PsiFile): PsiFile? =
+                file.virtualFile.parent.findChild(Constants.PACKAGE_LOCK_JSON)?.let {
+                    PsiManager.getInstance(file.project).findFile(it)
+                }
 
         private fun getYarnLockFile(file: PsiFile): PsiFile? = null
 
@@ -104,7 +101,8 @@ fun <T, R> Array<T>.mapFirst(function: (element: T) -> R?): R? {
     return null
 }
 
-fun String.trim(): String = StringUtil.replace(this, "\"", "")
+fun PsiElement.first(): String = this.firstChild.text.removeSurrounding("\"")
+fun PsiElement.last(): String = this.lastChild.text.removeSurrounding("\"")
 
 fun <A, B, R> ((A, B) -> R).memoize(): (A, B) -> R? {
     val cache: MutableMap<Pair<A, B>, WeakReference<R>> = ContainerUtil.newHashMap()
