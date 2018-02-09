@@ -63,10 +63,10 @@ class VulnerabilitiesScanner {
         }
 
         private fun <T> mapDependencies(json: JsonObject?, function: (element: JsonElement) -> T?): Sequence<T> =
-                buildSequence {
+                buildSequence<T> {
                     Constants.DEPENDENCIES_KEYS.forEach {
                         json?.findProperty(it)?.value?.children?.map {
-                            if (it is JsonElement) function(it).let { if (it !== null) yield(it!!) }
+                            if (it is JsonElement) function(it).let { if (it !== null) yield(it) }
                         }
                     }
                 }
