@@ -15,7 +15,7 @@ import mobi.hsz.idea.nodesecurity.messages.VulnerabilityNotification
 import mobi.hsz.idea.nodesecurity.utils.Constants
 import mobi.hsz.idea.nodesecurity.utils.Notify
 import mobi.hsz.idea.nodesecurity.utils.Utils
-import mobi.hsz.idea.nodesecurity.utils.VulnerabilitiesScanner
+import mobi.hsz.idea.nodesecurity.scanner.VulnerabilitiesScanner
 
 
 class NodeSecurityProjectComponent(project: Project) : AbstractProjectComponent(project), VulnerabilityNotification {

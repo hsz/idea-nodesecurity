@@ -36,6 +36,7 @@ dependencies {
     compile 'nl.komponents.kovenant:kovenant:3.3.0'
     compile 'nl.komponents.kovenant:kovenant-functional:3.3.0'
     compile 'com.vdurmont:semver4j:2.2.0'
+    compile 'com.esotericsoftware.yamlbeans:yamlbeans:1.13'
 }
 
 sourceCompatibility = 1.8
