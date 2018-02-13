@@ -16,7 +16,7 @@ class Utils {
             FileEditorManager.getInstance(project).openFile(file, true)
         }
 
-        fun isInNodeModules(file: VirtualFile): Boolean = file.path.toLowerCase().contains(NODE_MODULES)
+        fun isInNodeModules(file: VirtualFile): Boolean = file.path.toLowerCase().contains("/$NODE_MODULES/")
 
         fun isSupportedFile(file: VirtualFile?): Boolean = file?.name == PACKAGE_JSON && !isInNodeModules(file)
 

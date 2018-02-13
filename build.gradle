@@ -7,10 +7,10 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
-//
+
 plugins {
     id 'jacoco'
-    id 'org.jetbrains.intellij' version '0.2.17'
+    id 'org.jetbrains.intellij' version '0.2.18'
     id 'com.github.kt3k.coveralls' version '2.8.2'
 }
 
@@ -37,6 +37,7 @@ dependencies {
     compile 'nl.komponents.kovenant:kovenant-functional:3.3.0'
     compile 'com.vdurmont:semver4j:2.2.0'
     compile 'com.esotericsoftware.yamlbeans:yamlbeans:1.13'
+    testCompile 'com.nhaarman:mockito-kotlin:1.5.0'
 }
 
 sourceCompatibility = 1.8
@@ -73,6 +74,10 @@ test {
     testLogging {
         exceptionFormat = 'full'
     }
+}
+
+jacoco {
+    toolVersion = '0.8.0'
 }
 
 jacocoTestReport {
