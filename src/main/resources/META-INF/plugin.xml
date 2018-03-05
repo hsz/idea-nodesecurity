@@ -1,7 +1,7 @@
 <idea-plugin>
     <id>mobi.hsz.idea.nodesecurity</id>
     <name>Node Security</name>
-    <version>0.3.0</version>
+    <version>0.4.0</version>
     <vendor email="jakub@hsz.mobi" url="https://github.com/hsz/idea-nodesecurity">hsz</vendor>
 
     <description><![CDATA[
@@ -24,6 +24,8 @@
       <ul>
         <li>Highlight vulnerable dependencies in `package.json` file.</li>
         <li>Verify package.json files when project is opened</li>
+        <li><b>package-lock.json</b> and <b>yarn.lock</b> support</li>
+        <li>deep check of vulnerabilities</li>
       </ul>
 
       <br/>
@@ -32,20 +34,22 @@
 
     <change-notes><![CDATA[
 
-        <a href="https://github.com/hsz/idea-nodesecurity/tree/v0.3.0"><b>v0.3.0</b></a> (2018-02-06) <br/><br/>
-        <a href="https://github.com/hsz/idea-nodesecurity/compare/v0.3.0"><small>Full Changelog</small></a> <br/><br/>
+        <a href="https://github.com/hsz/idea-nodesecurity/tree/v0.4.0"><b>v0.4.0</b></a> (2018-03-05) <br/><br/>
+        <a href="https://github.com/hsz/idea-nodesecurity/compare/v0.4.0"><small>Full Changelog</small></a> <br/><br/>
 
         <i>Implemented enhancements:</i>
 
         <ul>
-            <li>Support package.json external updates (<a href="https://github.com/hsz/idea-nodesecurity/issues/1">#1</a>)</li>
-            <li>Memoize VulnerabilitiesScanner for better performance</li>
+            <li><b>package-lock.json</b> and <b>yarn.lock</b> support</li>
+            <li>deep check of vulnerabilities</li>
+            <li>performance optimizations</li>
+            <li>semver test fix</li>
         </ul>
 
         <i>Fixed bugs:</i>
 
         <ul>
-            <li>Unexpected token exception in Advisory.isVulnerable (<a href="https://github.com/hsz/idea-nodesecurity/issues/4">#4</a>, <a href="https://github.com/hsz/idea-nodesecurity/issues/5">#5</a>)</li>
+            <li>Won't accept electron beta version (<a href="https://github.com/hsz/idea-nodesecurity/issues/6">#6</a>)</li>
         </ul>
 
         <a href="https://github.com/hsz/idea-nodesecurity/blob/master/CHANGELOG.md"><b>Full Changelog History</b></a>

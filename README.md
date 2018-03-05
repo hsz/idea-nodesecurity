@@ -1,4 +1,4 @@
-Node Security plugin v0.3.0
+Node Security plugin v0.4.0
 ===========================
 
 [![Gitter][badge-gitter-img]][badge-gitter] [![Build Status][badge-travis-img]][badge-travis]
@@ -33,6 +33,9 @@ Features
 --------
 
 - Highlight vulnerable dependencies in `package.json` file.
+- Verify package.json files when project is opened
+- `package-lock.json` and `yarn.lock` support
+- deep check of vulnerabilities
 
 ![Highlight vulnerable dependencies](https://pbs.twimg.com/media/DUBi5oIX4AEYYEG.jpg)
 
@@ -51,18 +54,20 @@ Restart IDE.
 Changelog
 ---------
 
-### [v0.3.0](https://github.com/hsz/idea-nodesecurity/tree/v0.3.0) (2018-02-06)
+### [v0.4.0](https://github.com/hsz/idea-nodesecurity/tree/v0.4.0) (2018-03-05)
 
-[Full Changelog](https://github.com/hsz/idea-nodesecurity/compare/v0.3.0)
+[Full Changelog](https://github.com/hsz/idea-nodesecurity/compare/v0.4.0)
 
 **Implemented enhancements:**
 
-- Support package.json external updates ([\#1](https://github.com/hsz/idea-nodesecurity/issues/1))
-- Memoize VulnerabilitiesScanner for better performance
+- `package-lock.json` and `yarn.lock` support
+- deep check of vulnerabilities
+- performance optimizations
+- semver test fix
 
 **Fixed bugs**
 
-- Unexpected token exception in Advisory.isVulnerable ([\#4](https://github.com/hsz/idea-nodesecurity/issues/4), [\#5](https://github.com/hsz/idea-nodesecurity/issues/5))
+- Won't accept electron beta version ([\#6](https://github.com/hsz/idea-nodesecurity/issues/6))
 
 [Full Changelog History](./CHANGELOG.md)
 

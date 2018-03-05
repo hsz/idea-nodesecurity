@@ -1,6 +1,22 @@
 Change Log
 ----------
 
+### [v0.4.0](https://github.com/hsz/idea-nodesecurity/tree/v0.4.0) (2018-03-05)
+
+[Full Changelog](https://github.com/hsz/idea-nodesecurity/compare/v0.4.0)
+
+**Implemented enhancements:**
+
+- `package-lock.json` and `yarn.lock` support
+- deep check of vulnerabilities
+- performance optimizations
+- semver test fix
+
+**Fixed bugs**
+
+- Won't accept electron beta version ([\#6](https://github.com/hsz/idea-nodesecurity/issues/6))
+
+
 ### [v0.3.0](https://github.com/hsz/idea-nodesecurity/tree/v0.3.0) (2018-02-06)
 
 [Full Changelog](https://github.com/hsz/idea-nodesecurity/compare/v0.3.0)
