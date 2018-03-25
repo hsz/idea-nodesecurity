@@ -21,10 +21,13 @@ data class Advisory(
         val cvss_score: Float = 0F,
         val cwe: String = ""
 ) {
-    fun isVulnerable(version: String?): Boolean = try {
-        val semver = Semver(version, Semver.SemverType.NPM)
-        version !== null && !version.contains('x') && vulnerable_versions.split("||").any { semver.satisfies(it) }
-    } catch (e: SemverException) {
-        false
+    fun isVulnerable(version: String?): Boolean = when (version) {
+        null -> false
+        else -> try {
+            val semver = Semver(version, Semver.SemverType.NPM)
+            !version.contains('x') && vulnerable_versions.split("||").any { semver.satisfies(it) }
+        } catch (e: SemverException) {
+            false
+        }
     }
 }
