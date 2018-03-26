@@ -10,8 +10,8 @@ class YarnLockProvider(file: PsiFile) : LockProvider(file) {
     private val yaml = file.first().split("\n").mapNotNull {
         when {
             it.isEmpty() || it.startsWith("#") -> null
-            it.startsWith("  ") -> it.replace(Regex("^(\\s*[\\w-.]+) "), "$1: ").substring(2)
-            else -> it.replace(Regex("^\"?([^@\"]+).*"), "---\nname: $1")
+            it.startsWith("  ") -> it.replace(Regex("^(\\s*\"?@?[\\w-./]+\"?) "), "$1: ").substring(2)
+            else -> it.replace(Regex("^\"?(@?[^@\"]+).*"), "---\nname: \"$1\"")
         }
     }.joinToString("\n")
 
